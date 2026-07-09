@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Courses</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            background: #f4f7fc;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            position: fixed;
+            width: 250px;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+        }
+
+        .sidebar a:hover {
+            background: #2563eb;
+        }
+
+        .main {
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .course-icon {
+            font-size: 2.5rem;
+            color: #2563eb;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h3>🎓 Career AI</h3>
+        <a href="/dashboard"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="/"><i class="fas fa-brain"></i> Prediction</a>
+        <a href="/resume"><i class="fas fa-file-pdf"></i> Resume Analyzer</a>
+        <a href="/courses"><i class="fas fa-book"></i> Courses</a>
+        <a href="/profile"><i class="fas fa-user"></i> Profile</a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <div class="main">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2>📚 Recommended Courses</h2>
+                <p class="text-muted">Curated online programs to boost your career path transition</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Course 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="course-icon"><i class="fas fa-brain"></i></div>
+                        <span class="badge bg-success">Recommended</span>
+                    </div>
+                    <h4>Machine Learning Specialization</h4>
+                    <p class="text-muted">Deep dive into supervised & unsupervised learning algorithms.</p>
+                    <div class="mt-auto">
+                        <p class="mb-2 text-primary"><b>Career Path:</b> Data Scientist</p>
+                        <button onclick="showCourseDetails('ml')" class="btn btn-outline-primary btn-sm w-100">View
+                            Course Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="course-icon"><i class="fas fa-code"></i></div>
+                    </div>
+                    <h4>Python & Django Full Stack Developer</h4>
+                    <p class="text-muted">Learn backend development, databases, and front-end integration.</p>
+                    <div class="mt-auto">
+                        <p class="mb-2 text-primary"><b>Career Path:</b> Software Engineer</p>
+                        <button onclick="showCourseDetails('django')" class="btn btn-outline-primary btn-sm w-100">View
+                            Course Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="course-icon"><i class="fas fa-chart-line"></i></div>
+                    </div>
+                    <h4>Financial Modeling & Analysis</h4>
+                    <p class="text-muted">Excel sheet modeling, valuation methods, and financial reporting.</p>
+                    <div class="mt-auto">
+                        <p class="mb-2 text-primary"><b>Career Path:</b> Finance Analyst</p>
+                        <button onclick="showCourseDetails('finance')" class="btn btn-outline-primary btn-sm w-100">View
+                            Course Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="course-icon"><i class="fas fa-heartbeat"></i></div>
+                        <span class="badge bg-info text-dark">Pivot Friendly</span>
+                    </div>
+                    <h4>Healthcare Informatics Essentials</h4>
+                    <p class="text-muted">Understand health data systems, patient records, and medical standards.</p>
+                    <div class="mt-auto">
+                        <p class="mb-2 text-primary"><b>Career Path:</b> Healthcare Specialist</p>
+                        <button onclick="showCourseDetails('informatics')"
+                            class="btn btn-outline-primary btn-sm w-100">View Course Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="course-icon"><i class="fas fa-paint-brush"></i></div>
+                    </div>
+                    <h4>UX/UI Design Masterclass</h4>
+                    <p class="text-muted">Master Figma, prototyping, user testing, and visual design systems.</p>
+                    <div class="mt-auto">
+                        <p class="mb-2 text-primary"><b>Career Path:</b> UI/UX Designer</p>
+                        <button onclick="showCourseDetails('uiux')" class="btn btn-outline-primary btn-sm w-100">View
+                            Course Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 6 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="course-icon"><i class="fas fa-briefcase"></i></div>
+                    </div>
+                    <h4>Strategic Business Management</h4>
+                    <p class="text-muted">Learn leadership, project management, and corporate strategy.</p>
+                    <div class="mt-auto">
+                        <p class="mb-2 text-primary"><b>Career Path:</b> Business Consultant</p>
+                        <button onclick="showCourseDetails('business')"
+                            class="btn btn-outline-primary btn-sm w-100">View Course Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Details Modal -->
+    <div class="modal fade" id="courseDetailsModal" tabindex="-1" aria-labelledby="courseDetailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content"
+                style="border-radius: 20px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                <div class="modal-header bg-dark text-white" style="border-radius: 20px 20px 0 0; padding: 20px;">
+                    <div class="d-flex align-items-center">
+                        <span id="modalCourseIcon" class="me-3 fs-3"></span>
+                        <div>
+                            <h5 class="modal-title fw-bold" id="modalCourseTitle">Course Details</h5>
+                            <span class="badge bg-primary" id="modalCareerPath">Career Path</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding: 30px; background: #f8fafc;">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h5 class="fw-bold mb-3"><i class="fas fa-list-ol text-primary"></i> Learning Pathway &
+                                Modules</h5>
+                            <ol class="list-group list-group-numbered mb-4" id="modalModulesList"
+                                style="border-radius: 12px; font-size: 0.9rem;">
+                                <!-- Loaded dynamically -->
+                            </ol>
+
+                            <h5 class="fw-bold mb-3"><i class="fas fa-tools text-primary"></i> Key Skills Covered</h5>
+                            <div class="d-flex flex-wrap gap-2 mb-4" id="modalSkillsContainer">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="card p-3 mb-3 border border-light shadow-sm"
+                                style="border-radius: 15px; background: white;">
+                                <h6 class="fw-bold mb-2 text-dark"><i class="fas fa-info-circle text-primary"></i>
+                                    Overview</h6>
+                                <p class="small text-muted mb-2" id="modalOverviewText">Overview text...</p>
+                                <hr class="my-2">
+                                <p class="small mb-1"><b>Duration:</b> <span id="modalDuration">8 weeks</span></p>
+                                <p class="small mb-1"><b>Commitment:</b> <span id="modalCommitment">5-8
+                                        hours/week</span></p>
+                                <p class="small mb-0"><b>Prerequisites:</b> <span id="modalPrerequisites">None</span>
+                                </p>
+                            </div>
+
+                            <h5 class="fw-bold mb-3"><i class="fas fa-external-link-alt text-primary"></i> Top Learning
+                                Resources</h5>
+                            <div class="d-grid gap-2" id="modalLinksContainer">
+                                <!-- Links loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light" style="border-radius: 0 0 20px 20px; padding: 15px;">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if session.user_id %}
+    {% include 'chatbot_widget.html' %}
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mock data database for course details
+        const COURSE_DETAILS = {
+            'ml': {
+                title: "Machine Learning Specialization",
+                icon: '<i class="fas fa-brain text-success"></i>',
+                careerPath: "Data Scientist",
+                overview: "Learn the core algorithms of Machine Learning from Andrew Ng (DeepLearning.AI), covering supervised learning, unsupervised learning, and advanced practices.",
+                duration: "2 months",
+                commitment: "9 hours/week",
+                prerequisites: "Basic Python, high school algebra",
+                modules: [
+                    "Supervised Machine Learning: Regression and Classification",
+                    "Advanced Learning Algorithms (Neural Networks, Decision Trees)",
+                    "Unsupervised Learning, Recommenders, Reinforcement Learning"
+                ],
+                skills: ["Python", "Supervised Learning", "Linear Regression", "Neural Networks", "Scikit-Learn"],
+                resources: [
+                    { name: "Coursera Specialization (DeepLearning.AI)", url: "https://www.coursera.org/specializations/machine-learning-introduction", icon: "fab fa-coursera" },
+                    { name: "Official PyTorch Tutorials", url: "https://pytorch.org/tutorials/", icon: "fas fa-book" },
+                    { name: "StatQuest Machine Learning (YouTube)", url: "https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF", icon: "fab fa-youtube" }
+                ]
+            },
+            'django': {
+                title: "Python & Django Full Stack Developer",
+                icon: '<i class="fas fa-code text-primary"></i>',
+                careerPath: "Software Engineer",
+                overview: "Master server-side web development using Python and the Django framework. Learn templates, relational databases, REST APIs, and hosting.",
+                duration: "3 months",
+                commitment: "10 hours/week",
+                prerequisites: "Basic computer familiarity",
+                modules: [
+                    "Python Fundamentals & OOP Concepts",
+                    "Front-End Basics (HTML5, CSS3, JS & Bootstrap)",
+                    "Django Framework Core (Models, Views, Templates)",
+                    "REST API Development with Django REST Framework",
+                    "Deployment on AWS / Render & Database Management (PostgreSQL)"
+                ],
+                skills: ["Python", "Django", "SQL / Databases", "REST APIs", "HTML/CSS", "Git & GitHub"],
+                resources: [
+                    { name: "Python Django Tutorial for Beginners (YouTube)", url: "https://www.youtube.com/watch?v=F5mRW0q-A9c", icon: "fab fa-youtube" },
+                    { name: "Django Documentation official guide", url: "https://docs.djangoproject.com/en/stable/", icon: "fas fa-file-alt" },
+                    { name: "Udemy Complete Django Developer Course", url: "https://www.udemy.com/course/python-and-django-full-stack-web-developer-bootcamp/", icon: "fas fa-graduation-cap" }
+                ]
+            },
+            'finance': {
+                title: "Financial Modeling & Analysis",
+                icon: '<i class="fas fa-chart-line text-warning"></i>',
+                careerPath: "Finance Analyst",
+                overview: "Acquire the skills to build financial statements, run company valuations (DCF), analyze historical trends, and construct financial models.",
+                duration: "6 weeks",
+                commitment: "6 hours/week",
+                prerequisites: "Basic arithmetic & Excel",
+                modules: [
+                    "Advanced Microsoft Excel Techniques (Pivot, Index/Match)",
+                    "Accounting Fundamentals & Three-Statement Modeling",
+                    "Discounted Cash Flow (DCF) & LBO Valuation",
+                    "Scenario & Sensitivity Analysis"
+                ],
+                skills: ["Excel", "Financial Modeling", "Valuation", "Accounting", "Corporate Finance"],
+                resources: [
+                    { name: "Corporate Finance Institute (CFI) Free Courses", url: "https://corporatefinanceinstitute.com/", icon: "fas fa-university" },
+                    { name: "Financial Modeling Roadmap (YouTube)", url: "https://www.youtube.com/watch?v=34d7R4C3t8c", icon: "fab fa-youtube" }
+                ]
+            },
+            'informatics': {
+                title: "Healthcare Informatics Essentials",
+                icon: '<i class="fas fa-heartbeat text-danger"></i>',
+                careerPath: "Healthcare Specialist",
+                overview: "Understand clinical data architectures, Electronic Health Record (EHR) standards, health privacy regulations (HIPAA), and how data structures optimize patient care. (Highly recommended for transitioning nurses!)",
+                duration: "5 weeks",
+                commitment: "4 hours/week",
+                prerequisites: "Clinical background or basic data awareness",
+                modules: [
+                    "Introduction to Clinical Data & Healthcare Systems",
+                    "Electronic Health Records (EHR) & Health Information Exchanges",
+                    "Interoperability Standards: HL7 & FHIR",
+                    "Privacy, Security & Ethics (HIPAA compliance)",
+                    "Health Analytics & Clinical Support systems"
+                ],
+                skills: ["Clinical Data", "HL7 / FHIR", "EHR Systems", "HIPAA Regulations", "Data Standards"],
+                resources: [
+                    { name: "Coursera Clinical Informatics (Yale University)", url: "https://www.coursera.org/learn/clinical-informatics", icon: "fab fa-coursera" },
+                    { name: "HL7 FHIR Official Specification Reference", url: "https://hl7.org/fhir/", icon: "fas fa-link" },
+                    { name: "Intro to Health Informatics (YouTube)", url: "https://www.youtube.com/watch?v=qf4kZ3n9XyI", icon: "fab fa-youtube" }
+                ]
+            },
+            'uiux': {
+                title: "UX/UI Design Masterclass",
+                icon: '<i class="fas fa-paint-brush text-info"></i>',
+                careerPath: "UI/UX Designer",
+                overview: "From user research to high-fidelity interactive wireframes in Figma. Master typography, layout grids, user testing, and visual design guidelines.",
+                duration: "8 weeks",
+                commitment: "8 hours/week",
+                prerequisites: "None",
+                modules: [
+                    "Introduction to User Research & Persona Creation",
+                    "Wireframing, Sketching, and Information Architecture",
+                    "Figma Fundamentals (Autolayout, Components, Variants)",
+                    "Prototyping & Interactive Micro-animations",
+                    "Usability Testing & Developer Hand-off procedures"
+                ],
+                skills: ["Figma", "Wireframing", "User Research", "Visual Design Systems", "Prototyping"],
+                resources: [
+                    { name: "Figma Official Learning Tutorials", url: "https://help.figma.com/hc/en-us/categories/360002051613-Learn-Figma", icon: "fab fa-figma" },
+                    { name: "Google UX Design Professional Certificate (Coursera)", url: "https://www.coursera.org/professional-certificates/google-ux-design", icon: "fab fa-coursera" },
+                    { name: "UX Design Course for Beginners (YouTube)", url: "https://www.youtube.com/watch?v=c9Wg6Ry_Y40", icon: "fab fa-youtube" }
+                ]
+            },
+            'business': {
+                title: "Strategic Business Management",
+                icon: '<i class="fas fa-briefcase text-dark"></i>',
+                careerPath: "Business Consultant",
+                overview: "Develop leadership skills, understand corporate growth strategies, project management frameworks (Agile/Scrum), and client advisory templates.",
+                duration: "8 weeks",
+                commitment: "5 hours/week",
+                prerequisites: "None",
+                modules: [
+                    "Core Principles of Corporate Strategy",
+                    "Agile and Scrum Frameworks for Project Management",
+                    "Business Analytics & Strategic Decision-Making",
+                    "Leadership, Client Relations, and Business Presentation"
+                ],
+                skills: ["Strategic Planning", "Project Management", "Agile / Scrum", "Business Advisory"],
+                resources: [
+                    { name: "Agile Project Management (Google/Coursera)", url: "https://www.coursera.org/learn/agile-project-management", icon: "fab fa-coursera" },
+                    { name: "Harvard Business School Strategic Management course info", url: "https://online.hbs.edu/courses/strategy/", icon: "fas fa-university" }
+                ]
+            }
+        };
+
+        function showCourseDetails(courseId) {
+            const course = COURSE_DETAILS[courseId];
+            if (!course) return;
+
+            // Set Header Info
+            document.getElementById('modalCourseIcon').innerHTML = course.icon;
+            document.getElementById('modalCourseTitle').innerText = course.title;
+            document.getElementById('modalCareerPath').innerText = "Career Path: " + course.careerPath;
+
+            // Set Overview Text
+            document.getElementById('modalOverviewText').innerText = course.overview;
+
+            // Set Metadata
+            document.getElementById('modalDuration').innerText = course.duration;
+            document.getElementById('modalCommitment').innerText = course.commitment;
+            document.getElementById('modalPrerequisites').innerText = course.prerequisites;
+
+            // Load Modules List
+            const modulesList = document.getElementById('modalModulesList');
+            modulesList.innerHTML = "";
+            course.modules.forEach(mod => {
+                modulesList.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-start border-0 py-2 bg-transparent">
+            <div class="ms-2 me-auto">${mod}</div>
+        </li>`;
+            });
+
+            // Load Skills
+            const skillsContainer = document.getElementById('modalSkillsContainer');
+            skillsContainer.innerHTML = "";
+            course.skills.forEach(skill => {
+                skillsContainer.innerHTML += `<span class="badge bg-secondary p-2">${skill}</span>`;
+            });
+
+            // Load Links
+            const linksContainer = document.getElementById('modalLinksContainer');
+            linksContainer.innerHTML = "";
+            course.resources.forEach(res => {
+                linksContainer.innerHTML += `
+            <a href="${res.url}" target="_blank" class="btn btn-light border d-flex align-items-center gap-3 text-start py-2 px-3 hover-btn">
+                <i class="${res.icon} fs-5 text-primary" style="width: 25px;"></i>
+                <span class="small fw-semibold text-dark">${res.name}</span>
+            </a>
+        `;
+            });
+
+            // Open Bootstrap Modal
+            const modal = new bootstrap.Modal(document.getElementById('courseDetailsModal'));
+            modal.show();
+        }
+
+
+
+</body >
+</html >

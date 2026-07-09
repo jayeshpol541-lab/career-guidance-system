@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            background: #f4f7fc;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            position: fixed;
+            width: 250px;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+        }
+
+        .sidebar a:hover {
+            background: #2563eb;
+        }
+
+        .main {
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .upload-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .upload-zone:hover {
+            border-color: #2563eb;
+            background: #f8fafc;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h3>🎓 Career AI</h3>
+        <a href="/dashboard"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="/"><i class="fas fa-brain"></i> Prediction</a>
+        <a href="/resume"><i class="fas fa-file-pdf"></i> Resume Analyzer</a>
+        <a href="/courses"><i class="fas fa-book"></i> Courses</a>
+        <a href="/profile"><i class="fas fa-user"></i> Profile</a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <div class="main">
+        <div class="mb-4">
+            <h2>📄 AI Resume Analyzer</h2>
+            <p class="text-muted">Upload your resume to get instant improvements and ATS score matching</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card p-4">
+                    <h4 class="mb-3">Upload Resume</h4>
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                            <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <h5>Drag & drop your PDF/DOCX here</h5>
+                            <p class="text-muted small">or click to browse from files</p>
+                            <input type="file" id="fileInput" name="resume" accept=".pdf,.docx" style="display:none"
+                                onchange="handleFileSelect(event)">
+                            <div id="fileInfo" class="mt-2 text-primary fw-bold"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mt-4 py-2">
+                            <i class="fas fa-magic"></i> Analyze Resume
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div id="resultsCard" class="card p-4" style="display:none;">
+                    <h4 class="mb-3">Analysis Results</h4>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="me-4">
+                            <span class="display-4 fw-bold text-success" id="resumeScore">88%</span>
+                        </div>
+                        <div>
+                            <h5 class="mb-1" id="analysisTitle">ATS Score: Strong Match</h5>
+                            <p class="text-muted mb-0" id="analysisSubtitle">Your resume shows highly relevant keywords
+                                and standard formatting.</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h5 class="mt-3">Domain Category Breakdown</h5>
+                    <div id="categoryScoresContainer" class="mb-4">
+                        <!-- Loaded dynamically -->
+                    </div>
+
+                    <div id="pivotAdviceContainer" class="mb-4" style="display:none;">
+                        <div class="alert alert-warning border-warning"
+                            style="background-color: #fffbeb; border-radius: 12px;">
+                            <h6 class="alert-heading fw-bold text-warning-emphasis"><i
+                                    class="fas fa-exclamation-triangle"></i> Career Pivot Guidance</h6>
+                            <p class="mb-0 small text-warning-emphasis" id="pivotAdviceText"></p>
+                        </div>
+                    </div>
+
+                    <div id="matchedKeywordsContainer" class="mb-4" style="display:none;">
+                        <h5 class="mb-2">Matched Keywords</h5>
+                        <div id="keywordsBadges" class="d-flex flex-wrap gap-2">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+
+                    <h5 class="mt-3">Top Recommendations</h5>
+                    <ul class="list-group list-group-flush" id="recommendationsList">
+                        <!-- Loaded dynamically -->
+                    </ul>
+                </div>
+
+                <div id="emptyCard" class="card p-4 text-center justify-content-center align-items-center"
+                    style="min-height: 350px;">
+                    <div style="font-size: 4rem; color: #e2e8f0;"><i class="fas fa-chart-bar"></i></div>
+                    <h5 class="mt-3 text-muted">Upload a resume to see AI evaluation results</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if session.user_id %}
+    {% include 'chatbot_widget.html' %}
+    {% endif %}
+
+    <script>
+        function handleFileSelect(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                document.getElementById('fileInfo').innerText = "Selected: " + input.files[0].name;
+            }
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files || !fileInput.files[0]) {
+                alert("Please select a file to analyze.");
+                return;
+            }
+
+            const submitBtn = e.target.querySelector('button');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Analyzing...';
+
+            const formData = new FormData();
+            formData.append('resume', fileInput.files[0]);
+
+            fetch('/api/analyze_resume', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(err => { throw new Error(err.error || "Server error occurred"); });
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+
+                    if (data.success) {
+                        document.getElementById('emptyCard').style.display = 'none';
+                        document.getElementById('resultsCard').style.display = 'block';
+
+                        // Set Score
+                        document.getElementById('resumeScore').innerText = data.primary_score + "%";
+                        document.getElementById('analysisTitle').innerText = "ATS Score: Primary Match - " + data.primary_category;
+
+                        // Adjust status color class based on score
+                        const scoreElement = document.getElementById('resumeScore');
+                        scoreElement.className = "display-4 fw-bold " + (data.primary_score >= 70 ? "text-success" : (data.primary_score >= 40 ? "text-warning" : "text-danger"));
+
+                        document.getElementById('analysisSubtitle').innerText = `Your resume has been parsed successfully. Its primary domain is identified as ${data.primary_category}.`;
+
+                        // Render Breakdown
+                        const container = document.getElementById('categoryScoresContainer');
+                        container.innerHTML = "";
+
+                        const progressColors = {
+                            'Healthcare': 'bg-success',
+                            'Engineering / Tech': 'bg-primary',
+                            'Finance / Business': 'bg-info',
+                            'Design / UI-UX': 'bg-warning'
+                        };
+
+                        for (const [cat, val] of Object.entries(data.all_scores)) {
+                            const color = progressColors[cat] || 'bg-secondary';
+                            container.innerHTML += `
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>${cat}</span>
+                            <span class="fw-bold">${val}%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar ${color}" style="width: ${val}%"></div>
+                        </div>
+                    </div>
+                `;
+                        }
+
+                        // Render Pivot Advice
+                        const pivotContainer = document.getElementById('pivotAdviceContainer');
+                        if (data.pivot_advice) {
+                            document.getElementById('pivotAdviceText').innerText = data.pivot_advice;
+                            pivotContainer.style.display = "block";
+                        } else {
+                            pivotContainer.style.display = "none";
+                        }
+
+                        // Render Keywords
+                        const badgesContainer = document.getElementById('keywordsBadges');
+                        badgesContainer.innerHTML = "";
+                        if (data.matched_keywords && data.matched_keywords.length > 0) {
+                            data.matched_keywords.forEach(kw => {
+                                badgesContainer.innerHTML += `<span class="badge bg-secondary p-2 fs-6">${kw}</span>`;
+                            });
+                            document.getElementById('matchedKeywordsContainer').style.display = "block";
+                        } else {
+                            document.getElementById('matchedKeywordsContainer').style.display = "none";
+                        }
+
+                        // Render Recommendations
+                        const recList = document.getElementById('recommendationsList');
+                        recList.innerHTML = "";
+                        data.recommendations.forEach(rec => {
+                            recList.innerHTML += `
+                    <li class="list-group-item d-flex align-items-start px-0">
+                        <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                        <span>${rec}</span>
+                    </li>
+                `;
+                        });
+                    }
+                })
+                .catch(err => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    alert(err.message);
+                });
+        });
+    </script>
+</body>
+
+</html>
